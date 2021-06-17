@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+{% load static %}
+{% load cart_template_tag %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Bethany Bootstrap Template - Index</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="{% static 'img/favicon.png' %}" rel="icon">
+    <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    <!-- =======================================================
+  * Template Name: Bethany - v4.1.0
+  * Template URL: https://bootstrapmade.com/bethany-free-onepage-bootstrap-theme/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container">
+        <div class="header-container d-flex align-items-center justify-content-between">
+            <div class="logo">
+                <h1 class="text-light"><a href="index.html"><span>Bethany</span></a></h1>
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+            </div>
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    {% if user.is_authenticated %}
+                    <li><a class="nav-link scrollto active" href="{% url 'index' %}">Home</a></li>
+                    <li><a class="nav-link scrollto active" href="{% url 'orderlist' %}">Cart&nbsp;&nbsp;
+                            <div style="color:red;">{{request.user | cart_item_count }}</div>
+                        </a></li>
+                    {% if user.is_superuser %}
+                    <li><a class="nav-link scrollto active" href="{% url 'add_product' %}">Add Product</a></li>
+                    {% endif %}
+
+                    <li><a class="nav-link scrollto active" href="#hero">Welcome {{user.username}}</a></li>
+                    <li><a class="getstarted scrollto" href="{% url 'user_logout' %}">Logout</a></li>
+
+
+
+                    {% else %}
+                    <li><a class="getstarted scrollto" href="{% url 'user_login' %}">Login</a></li>
+                    <li><a class="getstarted scrollto" href="{% url 'user_register' %}">Register</a></li>
+                    {% endif %}
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+
+        </div><!-- End Header Container -->
+    </div>
+</header><!-- End Header -->
+
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Portfolio Details</h2>
+                <ol>
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li>Portfolio Details</li>
+                </ol>
+            </div>
+
+        </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+        <div class="container">
+            {% for message in messages%}
+            <h2>{{message}}</h2>
+            {% endfor %}
+
+            <div class="row gy-4">
+                <div class="col-lg-4">
+                    <div class="portfolio-info">
+                        <h3>Payment Summary</h3>
+                        <ul>
+                            <li><strong>Total Amount</strong>: {{final_price}}</li>
+                            <li>
+                                <button id="rzp-button1" class="btn btn-sm btn-dark btn-block" type="button">Pay
+                                    Now</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section><!-- End Portfolio Details Section -->
+
+</main><!-- End #main -->
+
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    var options = {
+        "key": "{{razorpay_merchant_id}}", // Enter the Key ID generated from the Dashboard
+        "amount": "{% widthratio final_price 1 100 %}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        "currency": "INR",
+        "name": "My E-COMMERCE WEBSITE",
+        "description": "Test Transaction",
+        "order_id": "{{order_id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        "callback_url": "{% url 'handlerequest' %}",
+        "prefill": {
+            "name": "{{request.user.username}}",
+            "email": "{{request.user.email}}",
+            "contact": "+91" + "{{request.user.phone_field}}"
+        },
+        "theme": {
+            "color": "#FF8800"
+        }
+    };
+    var rzp1 = new Razorpay(options);
+    document.getElementById('rzp-button1').onclick = function (e) {
+        rzp1.open();
+        e.preventDefault();
+    }
+</script>
+
+
+<!-- Vendor JS Files -->
+<script src="{% static 'vendor/aos/aos.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
+<script src="{% static 'vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
+<script src="{% static 'vendor/purecounter/purecounter.js' %}"></script>
+<script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+<!-- Template Main JS File -->
+<script src="{% static 'js/main.js' %}"></script>
+
+
+</html>
