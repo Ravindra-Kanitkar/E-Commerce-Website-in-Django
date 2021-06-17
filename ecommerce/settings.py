@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-p+r28mh==e(rshl-ku@$7(fv!x9r_ja)i*(g_c1+g_zc(lc8ac
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://ravindra-ecommerce.herokuapp.com/', 'localhost', '127.0.0.1']
 
 
 # Application definition
