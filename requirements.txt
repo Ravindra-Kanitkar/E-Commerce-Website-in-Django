@@ -7,9 +7,11 @@ chardet==4.0.0
 click==8.0.1
 colorama==0.4.4
 dj-database-url==0.5.0
+dj-static==0.0.6
 Django==3.2
 django-countries==7.2.1
 django-heroku==0.3.1
+django-toolbelt==0.0.1
 future==0.18.2
 gunicorn==20.1.0
 html5lib==1.1
@@ -27,6 +29,7 @@ reportlab==3.5.67
 requests==2.25.1
 six==1.16.0
 sqlparse==0.4.1
+static3==0.7.0
 toml==0.10.2
 urllib3==1.26.4
 webencodings==0.5.1
