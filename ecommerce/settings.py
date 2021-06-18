@@ -131,7 +131,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
-
+STATICFILES_STORAGE='whitenoise.django.GzipManifestStaticFilesStorage'
 
 RAZORPAY_ID = "rzp_test_vCFhEpIxl6Y3LO"
 RAZORPAY_SECRET = "ZLWSZimNlFTwonJRjmsQ90YT"
