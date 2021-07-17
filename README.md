@@ -17,13 +17,14 @@
   13. Install git. you can refer this link https://positive-stud.medium.com/how-to-download-install-git-for-windows-23ae8c12c5c7
   14. Open git bash from your new project directory and execute following commands <ul><li>git init</li><li>git add .</li><li>git commit -m “deploy”</li><li>heroku login</li></ul>
   15. Create heroku app with your_app_name by running <b>heroku create app_name</b>
-  16. Run <b>git push heroku master</b> command
-  17. RUN the following commands, <ol><li>heroku run python manage.py migrate</li><li>heroku open</li></ol>
-  18. You are required to allocate the allowed hosts or domain which your Django application serves. so add these lines in your settings.py file inside the allowed_hosts section <b>ALLOWED_HOSTS = [‘https://deploy-weather-application.herokuapp.com',
+  16. Run this command 👉 <b>heroku git:remote -a ravindra-ecommerce</b> that is your heroku app name.
+  17. You are required to allocate the allowed hosts or domain which your Django application serves. so add these lines in your settings.py file inside the allowed_hosts section <b>ALLOWED_HOSTS = [‘https://deploy-weather-application.herokuapp.com',
 ‘localhost’,
 ‘127.0.0.1’]</b>
-  19.Execute following commands again for reflecting the changes to heroku <ul><li>git add .</li><li>git commit -m “edit”</li><li>git push heroku master</li></ul>
-  20. You are DONE. Open your app using heroku open command. Happy Coding 😄😇
+  18. Run <b>git push heroku master</b> command
+  19. RUN the following commands, <ol><li>heroku run python manage.py migrate</li><li>heroku open</li></ol>
+  20.Execute following commands again for reflecting the changes to heroku <ul><li>git add .</li><li>git commit -m “edit”</li><li>git push heroku master</li></ul>
+  21. You are DONE. Open your app using heroku open command. Happy Coding 😄😇
   
 
 
