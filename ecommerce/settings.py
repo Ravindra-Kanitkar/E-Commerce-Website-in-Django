@@ -135,8 +135,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 
-RAZORPAY_ID = "rzp_test_vCFhEpIxl6Y3LO"
-RAZORPAY_SECRET = "ZLWSZimNlFTwonJRjmsQ90YT"
+RAZORPAY_ID = "Enter your Razorpay id here"
+RAZORPAY_SECRET = "Enter your Razorpay secret here"
 
 
 # Default primary key field type
